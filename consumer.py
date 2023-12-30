@@ -152,15 +152,18 @@ def callback(ch, method, properties, body):
 
     # Implement your logic based on the message content
     if message == 'ArrowUp':
-        motor_controller.forward()
+        motor_controller.forward(motor_controller.linear_speed)
     elif message == 'ArrowDown':
-        motor_controller.reverse()
+        motor_controller.reverse(motor_controller.linear_speed)
     elif message == 'ArrowRight':
-        motor_controller.right()
+        motor_controller.right(motor_controller.angular_speed)
     elif message == 'ArrowLeft':
-        motor_controller.left()
+        motor_controller.left(motor_controller.angular_speed)
     elif message == 's':
-        motor_controller.stop()
+        if(motor_controller.angular_speed>motor_controller.linear_speed):
+            motor_controller.stop(motor_controller.angular_speed)
+        else:
+            motor_controller.stop(motor_controller.linear_speed)
     # Add more conditions as needed
 
 def main():
